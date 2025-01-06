@@ -1,0 +1,34 @@
+#main diffuse mix code command
+python main.py --train_dir "FINAL\Tiny_imagenet_200_Data" --fractal_dir "C:/Users/Sahil/Downloads/deviantart-20241123T152615Z-001/deviantart" --prompts "winter,Autumn"
+
+for your imp modify the paths with relative your paths
+
+#resnet accuracy mix code
+python testing_resnet.py --original_data FINAL/Tiny_imagenet_200_Data --augmented_data result/generated --test_data tiny-imagenet-200/test/images --test_data tiny-imagenet-200\test\images --annotations_file tiny-imagenet-200\val\val_annotations.txt --wnids_file tiny-imagenet-200\wnids.txt --words_file tiny-imagenet-200\words.txt
+
+for your imp modify the paths with relative your paths and also its hardcoded for the above 
+two classes airplane and automoble if u want to change them you have to change them in the code too
+and if u want to add more then u have to gpt it newly since this wont work
+
+#base model testing
+python base_model.py --original_airplane "model_images/aeroplane" --original_automobile "model_images/automobile" --augmented_airplane "augmented_images/aeroplane" --augmented_automobile "augmented_images/automobile"  --testData_airplane "test_images\airplane" --testData_automobile "test_images\automobile"
+   
+   for your imp modify the paths with relative your paths and also its hardcoded for the above 
+two classes airplane and automoble if u want to change them you have to change them in the code too
+and if u want to add more then u have to gpt it newly since this wont work
+parser.add_argument("--original_airplane", type=str, required=True, help="Path to original airplane images.")
+    parser.add_argument("--original_automobile", type=str, required=True, help="Path to original automobile images.")
+    parser.add_argument("--augmented_airplane_a1", type=str, required=True, help="Path to augmented airplane images A1.")
+    parser.add_argument("--augmented_automobile_a1", type=str, required=True, help="Path to augmented automobile images A1.")
+    parser.add_argument("--augmented_airplane_a2", type=str, required=True, help="Path to augmented airplane images A2.")
+    parser.add_argument("--augmented_automobile_a2", type=str, required=True, help="Path to augmented automobile images A2.")
+    parser.add_argument("--testData_airplane", type=str, required=True, help="Path to test airplane images.")
+    parser.add_argument("--testData_automobile", type=str, required=True, help="Path to test automobile images.")
+#adversarial testing
+python disturbance_testing.py --augmented_automobile_a2 "saliency_result\result\generated\automobile" --augmented_airplane_a2 "saliency_result\result\generated\airplane" --augmented_automobile_a1 "result_cfiar/generated/automobile"  --augmented_airplane_a1 "result_cfiar/generated/airplane" --original_airplane "model_images/aeroplane" --original_automobile "model_images/automobile"  --testData_airplane "test_images\airplane" --testData_automobile "test_images\automobile"
+
+#final testing
+python final_testing.py --original_airplane "model_images/aeroplane" --original_automobile "model_images/automobile" --augmented_airplane "augmented_images/aeroplane" --augmented_automobile "augmented_images/automobile"  --testData_airplane "Final\cifar-10\airplane" --testData_automobile "Final\cifar-10\automobile"
+
+for final cifar 10 accuracy testing
+python final_testing.py --augmented_automobile_a2 "saliency_result\result\generated\automobile" --augmented_airplane_a2 "saliency_result\result\generated\airplane" --augmented_automobile_a1 "result_cfiar/generated/automobile"  --augmented_airplane_a1 "result_cfiar/generated/airplane" --original_airplane "model_images/aeroplane" --original_automobile "model_images/automobile"  --testData_airplane "test_images\airplane" --testData_automobile "test_images\automobile"

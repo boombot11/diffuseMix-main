@@ -1,0 +1,323 @@
+import os
+import shutil
+from torchvision import models, transforms
+from torch.utils.data import DataLoader
+from torchvision.datasets import ImageFolder
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from tqdm import tqdm
+
+def write_to_file(text):
+    """
+    Appends the given text to 'training_results.txt', ensuring each entry is on a new line.
+    
+    Parameters:
+        text (str): The text to be written to the file.
+    """
+    with open("training_results.txt", "a") as file:
+        file.write(text + "\n")
+
+
+# Paths
+BASE_DIR = "tiny-imagenet-200"  # Directory for annotations, wnids, words
+TRAIN_DIR = "tiny-imagenet-200/train"  # Actual train data directory
+ANNOTATIONS_FILE = os.path.join(BASE_DIR, "val", "val_annotations.txt")
+WORDS_FILE = os.path.join(BASE_DIR, "words.txt")
+WNIDS_FILE = os.path.join(BASE_DIR, "wnids.txt")
+
+# Directories for augmented and blended data
+AUGMENTED_DATA_DIR = "result/generated"
+BLENDED_DATA_DIR = "result/blended"
+
+# Number of classes to fine-tune
+NUM_CLASSES = 20
+
+# Device configuration
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# Step 1: Parse Files
+def parse_wnids(wnids_file, num_classes):
+    with open(wnids_file, "r") as file:
+        wnids = [line.strip() for line in file.readlines()]
+    return wnids[:num_classes]  # Select the first NUM_CLASSES
+
+def parse_val_annotations(annotations_file):
+    annotations = {}
+    with open(annotations_file, "r") as file:
+        for line in file.readlines():
+            parts = line.strip().split("\t")
+            image_filename, class_id = parts[0], parts[1]
+            annotations[image_filename] = class_id
+    return annotations
+
+def parse_words(words_file):
+    class_descriptions = {}
+    with open(words_file, "r") as file:
+        for line in file.readlines():
+            wnid, description = line.strip().split("\t", 1)
+            class_descriptions[wnid] = description
+    return class_descriptions
+
+# Step 2: Prepare Test Dataset (Test images for final evaluation)
+def prepare_test_set(base_dir, annotations, selected_wnids):
+    test_images_dir = os.path.join(base_dir, "test", "images")  # Correct directory for test images
+    output_dir = os.path.join(base_dir, "test_subset")
+
+    if os.path.exists(output_dir):
+        shutil.rmtree(output_dir)  # Remove previous run
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Create directories for each selected wnid
+    for wnid in selected_wnids:
+        os.makedirs(os.path.join(output_dir, wnid), exist_ok=True)
+
+    # Copy images to the new structure
+    for image_filename, class_id in annotations.items():
+        if class_id in selected_wnids:
+            src_path = os.path.join(test_images_dir, image_filename)
+            if os.path.exists(src_path):
+                dst_path = os.path.join(output_dir, class_id, image_filename)
+                shutil.copy(src_path, dst_path)
+            else:
+                print(f"Warning: File {src_path} not found. Skipping this image.")
+
+    return output_dir
+
+# Step 3: Prepare Dataloaders for Different Datasets (train, augmented, blended)
+def create_dataloaders(train_dir, selected_wnids, augmented_dir=None, blended_dir=None, batch_size=64, num_workers=4):
+    transform = transforms.Compose([
+        transforms.Resize((224, 224)),
+        transforms.RandomHorizontalFlip(p=0.2),  # Mild flip augmentation with low probability
+        transforms.RandomRotation(degrees=10),  # Mild rotation (±10 degrees)
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    ])
+    
+
+
+    # Prepare the train dataset
+    train_dataset = ImageFolder(train_dir, transform=transform)
+    print(f"Total samples in train dataset: {len(train_dataset.samples)}")
+    print(f"Unique classes in train dataset: {len(set([label for _, label in train_dataset.samples]))}")
+    # Map wnids to indices
+    wnid_to_class_id = {wnid: idx for idx, wnid in enumerate(selected_wnids)}
+
+    # Filter samples based on selected WNIDs
+    filtered_samples = [
+        (path, wnid_to_class_id[train_dataset.classes[label]])
+        for path, label in train_dataset.samples
+        if train_dataset.classes[label] in selected_wnids
+    ]
+    print(f"Filtered samples size: {len(filtered_samples)}")
+    train_dataset.samples = filtered_samples
+    train_dataset.targets = [label for _, label in filtered_samples]
+
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+
+    # Prepare augmented dataset if available
+    augmented_loader = None
+    if augmented_dir:
+        augmented_dataset = ImageFolder(augmented_dir, transform=transform)
+        augmented_dataset.samples = [
+            (path, wnid_to_class_id[augmented_dataset.classes[label]])
+            for path, label in augmented_dataset.samples
+            if augmented_dataset.classes[label] in selected_wnids
+        ]
+        augmented_loader = DataLoader(augmented_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+
+    # Prepare blended dataset if available
+    blended_loader = None
+    if blended_dir:
+        blended_dataset = ImageFolder(blended_dir, transform=transform)
+        blended_dataset.samples = [
+            (path, wnid_to_class_id[blended_dataset.classes[label]])
+            for path, label in blended_dataset.samples
+            if blended_dataset.classes[label] in selected_wnids
+        ]
+        blended_loader = DataLoader(blended_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+
+    return train_loader, augmented_loader, blended_loader
+
+class CustomResNetLike(nn.Module):
+    def __init__(self, num_classes=10):
+        super(CustomResNetLike, self).__init__()
+        self.in_channels = 32  # Reduced initial channels
+        self.conv1 = nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=1, bias=False)
+        self.bn1 = nn.BatchNorm2d(32)
+        self.relu = nn.ReLU(inplace=True)
+        self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
+        
+        # Reduce the depth of the network to 2 layers
+        self.layer1 = self._make_layer(BasicBlock, 32, 1, stride=1)  # 1 block with 32 filters
+        self.layer2 = self._make_layer(BasicBlock, 64, 1, stride=2)  # 1 block with 64 filters
+        
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        self.fc = nn.Linear(64, num_classes)  # Adjust output channels to 64
+
+    def _make_layer(self, block, out_channels, num_blocks, stride):
+        strides = [stride] + [1] * (num_blocks - 1)
+        layers = []
+        for stride in strides:
+            layers.append(block(self.in_channels, out_channels, stride))
+            self.in_channels = out_channels
+        return nn.Sequential(*layers)
+
+    def forward(self, x):
+        out = self.conv1(x)
+        out = self.bn1(out)
+        out = self.relu(out)
+        out = self.maxpool(out)
+        
+        out = self.layer1(out)
+        out = self.layer2(out)
+        
+        out = self.avgpool(out)
+        out = out.view(out.size(0), -1)
+        out = self.fc(out)
+        return out
+
+class BasicBlock(nn.Module):
+    def __init__(self, in_channels, out_channels, stride=1):
+        super(BasicBlock, self).__init__()
+        self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=3, stride=stride, padding=1, bias=False)
+        self.bn1 = nn.BatchNorm2d(out_channels)
+        self.relu = nn.ReLU(inplace=True)
+        self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3, stride=1, padding=1, bias=False)
+        self.bn2 = nn.BatchNorm2d(out_channels)
+        
+        self.shortcut = nn.Sequential()
+        if stride != 1 or in_channels != out_channels:
+            self.shortcut = nn.Sequential(
+                nn.Conv2d(in_channels, out_channels, kernel_size=1, stride=stride, bias=False),
+                nn.BatchNorm2d(out_channels)
+            )
+
+    def forward(self, x):
+        out = self.conv1(x)
+        out = self.bn1(out)
+        out = self.relu(out)
+        out = self.conv2(out)
+        out = self.bn2(out)
+        out += self.shortcut(x)
+        out = self.relu(out)
+        return out
+
+# Step 4: Fine-tune ResNet
+def fine_tune_resnet(test_loader,train_loader, num_classes, num_epochs=3, lr=1e-3):
+    model = CustomResNetLike(num_classes=num_classes)
+    model.fc = nn.Linear(model.fc.in_features, num_classes)  # Adjust output layer for NUM_CLASSES
+    model = model.to(DEVICE)
+
+    criterion = nn.CrossEntropyLoss()
+    optimizer = optim.Adam(model.parameters(), lr=lr)
+    print(f"Length of train_loader: {len(train_loader)}")
+    print(f"Batch size: {train_loader.batch_size}")
+    print(f"Total samples processed per epoch: {len(train_loader) * train_loader.batch_size}")
+    print(f"Number of batches in train_loader: {len(train_loader)}")
+    # for batch_idx, (images, labels) in enumerate(train_loader):
+    #   print(f"Batch {batch_idx + 1}: Batch size: {len(images)}")
+
+    print(f"Sampler: {train_loader.sampler}")
+    for epoch in range(10):
+        model.train()
+        running_loss = 0.0
+        correct = 0
+        total = 0
+        track=0
+        count=0
+        for images, labels in tqdm(train_loader, desc=f"Epoch {epoch + 1}/{num_epochs}"):
+            images, labels = images.to(DEVICE), labels.to(DEVICE)
+            track=track+1
+            # Print the image names in the batch
+            for i, path in enumerate(train_loader.dataset.samples):
+                count=count+1
+            #         print(f"Batch image name: {os.path.basename(path[0])}")
+            outputs = model(images)
+            loss = criterion(outputs, labels)
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+
+            running_loss += loss.item()
+            _, predicted = torch.max(outputs, 1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
+
+        epoch_loss = running_loss / len(train_loader)
+        epoch_acc = 100 * correct / total
+        print(f"Epoch {epoch + 1}: Loss: {epoch_loss:.4f}, Accuracy: {epoch_acc:.2f}%  no of images: {track}:::{count} ")
+        test_accuracy = evaluate_model(model, test_loader)
+        write_to_file(f"Test Accuracy: {test_accuracy:.2f}%")
+        print(f"Test Accuracy: {test_accuracy:.2f}%")
+        track=0
+    return model
+
+# Step 5: Evaluate Model
+def evaluate_model(model, test_loader):
+    model.eval()
+    correct = 0
+    total = 0
+
+    with torch.no_grad():
+        for images, labels in tqdm(test_loader, desc="Evaluating"):
+            images, labels = images.to(DEVICE), labels.to(DEVICE)
+            # print(f"Length of test_loader: {len(test_loader)}")
+            # print(f"Batch size: {test_loader.batch_size}")
+            # print(f"Total samples processed per epoch: {len(test_loader) * test_loader.batch_size}")
+            # print(f"Number of batches in train_loader: {len(test_loader)}")
+            # Print the image names during evaluation
+            # for i, path in enumerate(test_loader.dataset.samples):
+            #         print(f"Evaluating image name: {os.path.basename(path[0])}")
+
+            outputs = model(images)
+            _, predicted = torch.max(outputs, 1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
+
+    accuracy = 100 * correct / total
+    return accuracy
+
+# Main Script
+if __name__ == "__main__":
+    # Parse WNIDs and prepare the dataset
+    selected_wnids = parse_wnids(WNIDS_FILE, NUM_CLASSES)
+    val_annotations = parse_val_annotations(ANNOTATIONS_FILE)
+    class_descriptions = parse_words(WORDS_FILE)
+
+    # Prepare test set (instead of validation set)
+    print("Preparing test set...")
+    test_subset_dir = prepare_test_set(BASE_DIR, val_annotations, selected_wnids)
+
+    # Create dataloaders for normal, augmented, and blended data
+    print("Creating dataloaders...")
+    train_loader, augmented_loader, blended_loader = create_dataloaders(
+        TRAIN_DIR, selected_wnids, augmented_dir=AUGMENTED_DATA_DIR, blended_dir=BLENDED_DATA_DIR, batch_size=100
+    )
+    test_loader = DataLoader(ImageFolder(test_subset_dir, transform=transforms.ToTensor()), batch_size=64, shuffle=False)
+    # Fine-tune model on original data
+    write_to_file("Training on original data")
+    print("Training model on original data...")
+    model = fine_tune_resnet(test_loader,train_loader, num_classes=NUM_CLASSES, num_epochs=3)
+
+    # Evaluate model
+    print("Evaluating model on test data...")
+   
+    test_accuracy = evaluate_model(model, test_loader)
+    print(f"Test Accuracy: {test_accuracy:.2f}%")
+
+     # Fine-tune model on augmented data
+    write_to_file("Training on Augmented data")
+    if augmented_loader:
+        print("Training on augmented data...")
+        model = fine_tune_resnet(test_loader,augmented_loader, num_classes=NUM_CLASSES, num_epochs=3)
+        final_accuracy = evaluate_model(model, test_loader)
+        print(f"Test Accuracy (Augmented data): {final_accuracy:.2f}%")
+
+    # Fine-tune model on blended data
+    write_to_file("Training on")
+    if blended_loader:
+        print("Training on blended data...")
+        model = fine_tune_resnet(test_loader,blended_loader, num_classes=NUM_CLASSES, num_epochs=3)
+        final_accuracy = evaluate_model(model, test_loader)

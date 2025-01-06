@@ -1,0 +1,195 @@
+NORMAL TRAINING
+Epoch 1/10: Train Loss=1.4149, Train Acc=70.38%, Val Loss=2.6637, Val Acc=46.00%
+Epoch 2/10: Train Loss=0.4219, Train Acc=82.62%, Val Loss=2.3856, Val Acc=70.50%
+Epoch 3/10: Train Loss=0.4057, Train Acc=83.25%, Val Loss=0.3151, Val Acc=86.50%
+Epoch 4/10: Train Loss=0.3260, Train Acc=86.38%, Val Loss=0.2619, Val Acc=86.00%
+Epoch 5/10: Train Loss=0.2961, Train Acc=87.50%, Val Loss=0.5118, Val Acc=73.00%
+Epoch 6/10: Train Loss=0.2831, Train Acc=87.88%, Val Loss=0.3734, Val Acc=86.00%
+Epoch 7/10: Train Loss=0.2751, Train Acc=88.00%, Val Loss=0.2448, Val Acc=86.50%
+Epoch 8/10: Train Loss=0.2720, Train Acc=88.25%, Val Loss=0.3398, Val Acc=85.00%
+Epoch 9/10: Train Loss=0.2492, Train Acc=91.25%, Val Loss=0.2186, Val Acc=90.00%
+Epoch 10/10: Train Loss=0.2260, Train Acc=91.75%, Val Loss=0.2482, Val Acc=88.50%
+Test Accuracy: 52.67%
+A1 TRAINING
+Epoch 1/10: Train Loss=0.4722, Train Acc=78.04%, Val Loss=0.4285, Val Acc=81.17%
+Epoch 2/10: Train Loss=0.4519, Train Acc=79.12%, Val Loss=0.4556, Val Acc=80.00%
+Epoch 3/10: Train Loss=0.3833, Train Acc=83.29%, Val Loss=0.5332, Val Acc=73.17%
+Epoch 4/10: Train Loss=0.3732, Train Acc=83.21%, Val Loss=0.5419, Val Acc=75.67%
+Epoch 5/10: Train Loss=0.3631, Train Acc=83.83%, Val Loss=0.3867, Val Acc=80.67%
+Epoch 6/10: Train Loss=0.3034, Train Acc=87.12%, Val Loss=0.4539, Val Acc=80.67%
+Epoch 7/10: Train Loss=0.3038, Train Acc=86.88%, Val Loss=0.4969, Val Acc=78.33%
+Epoch 8/10: Train Loss=0.2592, Train Acc=88.46%, Val Loss=0.7527, Val Acc=70.67%
+Epoch 9/10: Train Loss=0.2286, Train Acc=90.08%, Val Loss=0.3951, Val Acc=80.00%
+Epoch 10/10: Train Loss=0.2021, Train Acc=91.08%, Val Loss=0.3981, Val Acc=82.83%
+Test Accuracy: 54.54%
+A2 TRAINING
+Epoch 1/10: Train Loss=0.8993, Train Acc=69.00%, Val Loss=0.5528, Val Acc=73.50%
+Epoch 2/10: Train Loss=0.5562, Train Acc=72.38%, Val Loss=0.4983, Val Acc=75.17%
+Epoch 3/10: Train Loss=0.5033, Train Acc=76.12%, Val Loss=0.4762, Val Acc=75.83%
+Epoch 4/10: Train Loss=0.4780, Train Acc=77.12%, Val Loss=0.4943, Val Acc=75.33%
+Epoch 5/10: Train Loss=0.4695, Train Acc=78.33%, Val Loss=0.4538, Val Acc=79.17%
+Epoch 6/10: Train Loss=0.4418, Train Acc=79.38%, Val Loss=0.5379, Val Acc=72.83%
+Epoch 7/10: Train Loss=0.4136, Train Acc=80.71%, Val Loss=0.4991, Val Acc=74.00%
+Epoch 8/10: Train Loss=0.3761, Train Acc=83.38%, Val Loss=0.5452, Val Acc=71.00%
+Epoch 9/10: Train Loss=0.3677, Train Acc=84.00%, Val Loss=0.5380, Val Acc=76.83%
+Epoch 10/10: Train Loss=0.3454, Train Acc=83.46%, Val Loss=0.4595, Val Acc=77.83%
+Test Accuracy: 58.71%
+NORMAL TRAINING
+Epoch 1/10: Train Loss=0.1736, Train Acc=93.50%, Val Loss=0.2521, Val Acc=91.50%
+Epoch 2/10: Train Loss=0.1234, Train Acc=95.38%, Val Loss=0.3585, Val Acc=83.50%
+Epoch 3/10: Train Loss=0.1291, Train Acc=95.00%, Val Loss=0.3269, Val Acc=89.00%
+Epoch 4/10: Train Loss=0.1186, Train Acc=95.62%, Val Loss=0.3972, Val Acc=87.00%
+Epoch 5/10: Train Loss=0.0927, Train Acc=96.62%, Val Loss=0.3676, Val Acc=84.50%
+Epoch 6/10: Train Loss=0.0845, Train Acc=97.62%, Val Loss=0.3244, Val Acc=88.50%
+Epoch 7/10: Train Loss=0.0501, Train Acc=98.12%, Val Loss=0.2267, Val Acc=94.00%
+Epoch 8/10: Train Loss=0.0295, Train Acc=98.88%, Val Loss=0.1381, Val Acc=94.50%
+Epoch 9/10: Train Loss=0.0113, Train Acc=99.75%, Val Loss=0.2066, Val Acc=93.00%
+Epoch 10/10: Train Loss=0.0138, Train Acc=99.88%, Val Loss=0.2120, Val Acc=95.00%
+Test Accuracy: 56.83%
+A1 TRAINING
+Epoch 1/10: Train Loss=0.4164, Train Acc=81.67%, Val Loss=0.3290, Val Acc=85.17%
+Epoch 2/10: Train Loss=0.3085, Train Acc=86.33%, Val Loss=0.3745, Val Acc=82.67%
+Epoch 3/10: Train Loss=0.2687, Train Acc=88.21%, Val Loss=0.3365, Val Acc=86.17%
+Epoch 4/10: Train Loss=0.2230, Train Acc=89.42%, Val Loss=0.4314, Val Acc=83.50%
+Epoch 5/10: Train Loss=0.2055, Train Acc=90.75%, Val Loss=0.2890, Val Acc=87.83%
+Epoch 6/10: Train Loss=0.1857, Train Acc=91.96%, Val Loss=0.4015, Val Acc=84.33%
+Epoch 7/10: Train Loss=0.1788, Train Acc=92.33%, Val Loss=0.4832, Val Acc=80.83%
+Epoch 8/10: Train Loss=0.1699, Train Acc=92.79%, Val Loss=0.4407, Val Acc=83.17%
+Epoch 9/10: Train Loss=0.1336, Train Acc=94.75%, Val Loss=0.3624, Val Acc=87.67%
+Epoch 10/10: Train Loss=0.1108, Train Acc=95.33%, Val Loss=0.3897, Val Acc=84.17%
+Test Accuracy: 56.79%
+A2 TRAINING
+Epoch 1/10: Train Loss=1.0684, Train Acc=61.54%, Val Loss=0.6444, Val Acc=66.17%
+Epoch 2/10: Train Loss=0.5646, Train Acc=71.88%, Val Loss=0.5154, Val Acc=74.67%
+Epoch 3/10: Train Loss=0.5173, Train Acc=74.79%, Val Loss=0.4735, Val Acc=80.33%
+Epoch 4/10: Train Loss=0.5119, Train Acc=76.21%, Val Loss=0.4941, Val Acc=75.33%
+Epoch 5/10: Train Loss=0.4648, Train Acc=78.29%, Val Loss=0.5001, Val Acc=77.67%
+Epoch 6/10: Train Loss=0.4728, Train Acc=77.88%, Val Loss=0.5290, Val Acc=74.50%
+Epoch 7/10: Train Loss=0.4639, Train Acc=79.12%, Val Loss=0.4813, Val Acc=78.00%
+Epoch 8/10: Train Loss=0.4350, Train Acc=79.04%, Val Loss=0.4497, Val Acc=78.83%
+Epoch 9/10: Train Loss=0.4080, Train Acc=80.67%, Val Loss=0.4455, Val Acc=79.17%
+Epoch 10/10: Train Loss=0.4095, Train Acc=81.17%, Val Loss=0.4697, Val Acc=78.67%
+Test Accuracy: 55.58%
+NORMAL TRAINING
+Epoch 1/10: Train Loss=0.2640, Train Acc=89.88%, Val Loss=0.2451, Val Acc=91.00%
+Epoch 2/10: Train Loss=0.1958, Train Acc=91.88%, Val Loss=0.1974, Val Acc=90.00%
+Epoch 3/10: Train Loss=0.1562, Train Acc=93.75%, Val Loss=0.2258, Val Acc=92.00%
+Epoch 4/10: Train Loss=0.1261, Train Acc=93.75%, Val Loss=0.3082, Val Acc=87.00%
+Epoch 5/10: Train Loss=0.1230, Train Acc=95.62%, Val Loss=0.2773, Val Acc=91.50%
+Epoch 6/10: Train Loss=0.1730, Train Acc=93.50%, Val Loss=0.3678, Val Acc=81.00%
+Epoch 7/10: Train Loss=0.1425, Train Acc=94.12%, Val Loss=0.3718, Val Acc=86.00%
+Epoch 8/10: Train Loss=0.0992, Train Acc=96.12%, Val Loss=0.2322, Val Acc=91.00%
+Epoch 9/10: Train Loss=0.0600, Train Acc=97.50%, Val Loss=0.2549, Val Acc=90.50%
+Epoch 10/10: Train Loss=0.0779, Train Acc=97.62%, Val Loss=0.3358, Val Acc=89.50%
+Test Accuracy: 54.08%
+A1 TRAINING
+Epoch 1/10: Train Loss=0.4460, Train Acc=80.83%, Val Loss=0.4128, Val Acc=81.33%
+Epoch 2/10: Train Loss=0.3675, Train Acc=83.54%, Val Loss=0.4326, Val Acc=79.17%
+Epoch 3/10: Train Loss=0.3268, Train Acc=85.75%, Val Loss=0.3842, Val Acc=83.17%
+Epoch 4/10: Train Loss=0.2863, Train Acc=87.58%, Val Loss=0.3972, Val Acc=81.67%
+Epoch 5/10: Train Loss=0.2624, Train Acc=88.38%, Val Loss=0.3847, Val Acc=83.33%
+Epoch 6/10: Train Loss=0.2264, Train Acc=90.50%, Val Loss=0.3663, Val Acc=85.00%
+Epoch 7/10: Train Loss=0.2229, Train Acc=91.21%, Val Loss=0.6130, Val Acc=79.67%
+Epoch 8/10: Train Loss=0.2110, Train Acc=90.46%, Val Loss=0.3583, Val Acc=86.17%
+Epoch 9/10: Train Loss=0.1712, Train Acc=92.88%, Val Loss=0.3814, Val Acc=83.67%
+Epoch 10/10: Train Loss=0.1713, Train Acc=92.71%, Val Loss=0.3319, Val Acc=84.83%
+Test Accuracy: 55.62%
+A2 TRAINING
+Epoch 1/10: Train Loss=0.9199, Train Acc=66.92%, Val Loss=0.5635, Val Acc=73.33%
+Epoch 2/10: Train Loss=0.5251, Train Acc=75.25%, Val Loss=0.6628, Val Acc=70.00%
+Epoch 3/10: Train Loss=0.5262, Train Acc=73.79%, Val Loss=0.5813, Val Acc=70.33%
+Epoch 4/10: Train Loss=0.4751, Train Acc=77.25%, Val Loss=0.4722, Val Acc=78.17%
+Epoch 5/10: Train Loss=0.4399, Train Acc=79.12%, Val Loss=0.5055, Val Acc=74.00%
+Epoch 6/10: Train Loss=0.4410, Train Acc=79.79%, Val Loss=0.4521, Val Acc=80.00%
+Epoch 7/10: Train Loss=0.4212, Train Acc=80.38%, Val Loss=0.5065, Val Acc=78.33%
+Epoch 8/10: Train Loss=0.3885, Train Acc=82.21%, Val Loss=0.4252, Val Acc=81.00%
+Epoch 9/10: Train Loss=0.3727, Train Acc=82.75%, Val Loss=0.4682, Val Acc=80.50%
+Epoch 10/10: Train Loss=0.3374, Train Acc=84.67%, Val Loss=0.4443, Val Acc=83.00%
+Test Accuracy: 55.67%
+NORMAL TRAINING
+Epoch 1/10: Train Loss=0.2113, Train Acc=91.38%, Val Loss=0.1763, Val Acc=93.00%
+Epoch 2/10: Train Loss=0.1688, Train Acc=93.75%, Val Loss=0.2179, Val Acc=90.00%
+Epoch 3/10: Train Loss=0.1140, Train Acc=95.12%, Val Loss=0.1888, Val Acc=94.50%
+Epoch 4/10: Train Loss=0.0986, Train Acc=96.12%, Val Loss=0.2174, Val Acc=93.00%
+Epoch 5/10: Train Loss=0.0960, Train Acc=96.12%, Val Loss=0.2129, Val Acc=91.50%
+Epoch 6/10: Train Loss=0.0672, Train Acc=97.88%, Val Loss=0.3149, Val Acc=88.00%
+Epoch 7/10: Train Loss=0.0533, Train Acc=98.12%, Val Loss=0.2300, Val Acc=93.00%
+Epoch 8/10: Train Loss=0.0392, Train Acc=98.38%, Val Loss=0.2403, Val Acc=93.00%
+Epoch 9/10: Train Loss=0.0294, Train Acc=98.75%, Val Loss=0.2790, Val Acc=88.50%
+Epoch 10/10: Train Loss=0.1040, Train Acc=96.25%, Val Loss=0.8222, Val Acc=78.00%
+Test Accuracy: 53.75%
+A1 TRAINING
+Epoch 1/10: Train Loss=0.4456, Train Acc=81.25%, Val Loss=0.4045, Val Acc=81.17%
+Epoch 2/10: Train Loss=0.3485, Train Acc=85.33%, Val Loss=0.3639, Val Acc=83.17%
+Epoch 3/10: Train Loss=0.2795, Train Acc=87.75%, Val Loss=0.3409, Val Acc=84.33%
+Epoch 4/10: Train Loss=0.2505, Train Acc=88.67%, Val Loss=0.4794, Val Acc=82.17%
+Epoch 5/10: Train Loss=0.2306, Train Acc=90.04%, Val Loss=0.3731, Val Acc=85.17%
+Epoch 6/10: Train Loss=0.1986, Train Acc=91.46%, Val Loss=0.3305, Val Acc=87.50%
+Epoch 7/10: Train Loss=0.1708, Train Acc=92.75%, Val Loss=0.3150, Val Acc=87.00%
+Epoch 8/10: Train Loss=0.1815, Train Acc=92.25%, Val Loss=0.3934, Val Acc=84.83%
+Epoch 9/10: Train Loss=0.1593, Train Acc=93.29%, Val Loss=0.3897, Val Acc=84.67%
+Epoch 10/10: Train Loss=0.1246, Train Acc=94.46%, Val Loss=0.4046, Val Acc=85.50%
+Test Accuracy: 58.25%
+A2 TRAINING
+Epoch 1/10: Train Loss=0.9211, Train Acc=68.92%, Val Loss=0.8656, Val Acc=55.50%
+Epoch 2/10: Train Loss=0.5458, Train Acc=72.54%, Val Loss=0.5251, Val Acc=73.83%
+Epoch 3/10: Train Loss=0.4942, Train Acc=76.04%, Val Loss=0.5004, Val Acc=75.50%
+Epoch 4/10: Train Loss=0.4644, Train Acc=78.04%, Val Loss=0.5475, Val Acc=78.33%
+Epoch 5/10: Train Loss=0.4396, Train Acc=79.71%, Val Loss=0.4607, Val Acc=78.83%
+Epoch 6/10: Train Loss=0.4366, Train Acc=79.50%, Val Loss=0.4566, Val Acc=79.67%
+Epoch 7/10: Train Loss=0.4065, Train Acc=80.67%, Val Loss=0.4825, Val Acc=77.00%
+Epoch 8/10: Train Loss=0.3767, Train Acc=82.62%, Val Loss=0.5087, Val Acc=76.67%
+Epoch 9/10: Train Loss=0.3673, Train Acc=82.75%, Val Loss=0.4429, Val Acc=79.33%
+Epoch 10/10: Train Loss=0.3700, Train Acc=83.38%, Val Loss=0.4081, Val Acc=82.17%
+Test Accuracy: 54.96%
+NORMAL TRAINING
+Epoch 1/10: Train Loss=0.1875, Train Acc=92.62%, Val Loss=0.1757, Val Acc=93.00%
+Epoch 2/10: Train Loss=0.1216, Train Acc=94.50%, Val Loss=0.1527, Val Acc=93.50%
+Epoch 3/10: Train Loss=0.1017, Train Acc=97.00%, Val Loss=0.2653, Val Acc=87.50%
+Epoch 4/10: Train Loss=0.0931, Train Acc=96.75%, Val Loss=0.1334, Val Acc=95.50%
+Epoch 5/10: Train Loss=0.0790, Train Acc=96.88%, Val Loss=0.3787, Val Acc=87.00%
+Epoch 6/10: Train Loss=0.1176, Train Acc=96.00%, Val Loss=0.3034, Val Acc=88.50%
+Epoch 7/10: Train Loss=0.0877, Train Acc=96.25%, Val Loss=0.2080, Val Acc=90.00%
+Epoch 8/10: Train Loss=0.0483, Train Acc=98.12%, Val Loss=0.1666, Val Acc=93.50%
+Epoch 9/10: Train Loss=0.0573, Train Acc=97.88%, Val Loss=0.2093, Val Acc=92.50%
+Epoch 10/10: Train Loss=0.0344, Train Acc=98.75%, Val Loss=0.2440, Val Acc=91.00%
+Test Accuracy: 53.00%
+A1 TRAINING
+Epoch 1/10: Train Loss=0.4762, Train Acc=79.96%, Val Loss=0.4616, Val Acc=78.00%
+Epoch 2/10: Train Loss=0.3365, Train Acc=85.17%, Val Loss=0.3731, Val Acc=83.33%
+Epoch 3/10: Train Loss=0.3000, Train Acc=86.46%, Val Loss=0.3076, Val Acc=85.50%
+Epoch 4/10: Train Loss=0.2623, Train Acc=88.04%, Val Loss=0.4751, Val Acc=75.83%
+Epoch 5/10: Train Loss=0.2313, Train Acc=89.79%, Val Loss=0.3604, Val Acc=83.67%
+Epoch 6/10: Train Loss=0.2179, Train Acc=90.71%, Val Loss=0.5068, Val Acc=81.33%
+Epoch 7/10: Train Loss=0.1896, Train Acc=91.58%, Val Loss=0.3419, Val Acc=87.17%
+Epoch 8/10: Train Loss=0.1569, Train Acc=93.21%, Val Loss=0.3999, Val Acc=86.00%
+Epoch 9/10: Train Loss=0.1554, Train Acc=93.58%, Val Loss=0.3261, Val Acc=87.00%
+Epoch 10/10: Train Loss=0.1306, Train Acc=94.71%, Val Loss=0.3948, Val Acc=85.50%
+Test Accuracy: 50.67%
+A2 TRAINING
+Epoch 1/10: Train Loss=0.9453, Train Acc=67.00%, Val Loss=0.6651, Val Acc=72.50%
+Epoch 2/10: Train Loss=0.5564, Train Acc=72.92%, Val Loss=0.5337, Val Acc=72.17%
+Epoch 3/10: Train Loss=0.4935, Train Acc=76.33%, Val Loss=0.5215, Val Acc=77.83%
+Epoch 4/10: Train Loss=0.4793, Train Acc=77.38%, Val Loss=0.4632, Val Acc=79.17%
+Epoch 5/10: Train Loss=0.4588, Train Acc=77.96%, Val Loss=0.5163, Val Acc=73.83%
+Epoch 6/10: Train Loss=0.4531, Train Acc=78.58%, Val Loss=0.5304, Val Acc=74.50%
+Epoch 7/10: Train Loss=0.4354, Train Acc=79.04%, Val Loss=0.4802, Val Acc=77.67%
+Epoch 8/10: Train Loss=0.4152, Train Acc=80.46%, Val Loss=0.5026, Val Acc=76.33%
+Epoch 9/10: Train Loss=0.4061, Train Acc=81.42%, Val Loss=0.4884, Val Acc=76.17%
+Epoch 10/10: Train Loss=0.3985, Train Acc=80.50%, Val Loss=0.4550, Val Acc=79.00%
+Test Accuracy: 53.25%
+NORMAL TRAINING
+Epoch 1/10: Train Loss=0.2374, Train Acc=90.88%, Val Loss=0.3662, Val Acc=84.00%
+Epoch 2/10: Train Loss=0.1855, Train Acc=91.62%, Val Loss=0.1992, Val Acc=91.00%
+Epoch 3/10: Train Loss=0.1705, Train Acc=92.88%, Val Loss=0.3101, Val Acc=87.50%
+Epoch 4/10: Train Loss=0.1454, Train Acc=94.50%, Val Loss=0.2088, Val Acc=91.50%
+Epoch 5/10: Train Loss=0.1165, Train Acc=95.75%, Val Loss=0.2015, Val Acc=91.00%
+Epoch 6/10: Train Loss=0.0863, Train Acc=96.50%, Val Loss=0.2868, Val Acc=88.50%
+Epoch 7/10: Train Loss=0.1188, Train Acc=95.75%, Val Loss=0.2305, Val Acc=90.00%
+Epoch 8/10: Train Loss=0.1333, Train Acc=94.88%, Val Loss=0.3849, Val Acc=85.50%
+Epoch 9/10: Train Loss=0.0726, Train Acc=97.00%, Val Loss=0.2889, Val Acc=89.00%
+Epoch 10/10: Train Loss=0.0812, Train Acc=97.50%, Val Loss=0.2782, Val Acc=88.00%
+Test Accuracy: 55.46%
+A1 TRAINING
+Epoch 1/10: Train Loss=0.4192, Train Acc=81.96%, Val Loss=0.3882, Val Acc=80.33%
+Epoch 2/10: Train Loss=0.3574, Train Acc=84.25%, Val Loss=0.3764, Val Acc=82.83%
