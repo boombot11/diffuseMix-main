@@ -1,0 +1,5 @@
+Training Run,Eval #,Original Dataset Accuracy,Augmented+Original Accuracy
+1,,{acc:.2f},
+2,,{acc:.2f},
+3,,{acc:.2f},
+4,,{acc:.2f},

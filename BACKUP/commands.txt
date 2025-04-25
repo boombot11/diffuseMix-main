@@ -1,0 +1,26 @@
+#main diffuse mix code command
+python main.py --train_dir "./train/cifar-10-batches-py" --fractal_dir "C:/Users/Sahil/Downloads/deviantart-20241123T152615Z-001/deviantart" --prompts "sunset,Autumn"
+
+for your imp modify the paths with relative your paths
+
+#resnet accuracy mix code
+python testing_resnet.py --original_airplane "model_images/aeroplane" --original_automobile "model_images/automobile" --augmented_airplane "augmented_images/aeroplane" --augmented_automobile "augmented_images/automobile"  --testData_airplane "test_images\airplane" --testData_automobile "test_images\automobile"
+
+for your imp modify the paths with relative your paths and also its hardcoded for the above 
+two classes airplane and automoble if u want to change them you have to change them in the code too
+and if u want to add more then u have to gpt it newly since this wont work
+
+#base model testing
+python base_model.py --original_airplane "model_images/aeroplane" --original_automobile "model_images/automobile" --augmented_airplane "augmented_images/aeroplane" --augmented_automobile "augmented_images/automobile"  --testData_airplane "test_images\airplane" --testData_automobile "test_images\automobile"
+   
+   for your imp modify the paths with relative your paths and also its hardcoded for the above 
+two classes airplane and automoble if u want to change them you have to change them in the code too
+and if u want to add more then u have to gpt it newly since this wont work
+
+#adversarial testing
+python disturbance_testing.py --original_airplane "model_images/aeroplane" --original_automobile "model_images/automobile" --augmented_airplane "augmented_images/aeroplane" --augmented_automobile "augmented_images/automobile"  --testData_airplane "test_images\airplane" --testData_automobile "test_images\automobile"
+
+#final testing
+python final_testing.py --original_airplane "model_images/aeroplane" --original_automobile "model_images/automobile" --augmented_airplane "augmented_images/aeroplane" --augmented_automobile "augmented_images/automobile"  --testData_airplane "Final\cifar-10\airplane" --testData_automobile "Final\cifar-10\automobile"
+
+for final cifar 10 accuracy testing

@@ -1,0 +1,30 @@
+name: DiffuseMix
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  - numpy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - pytorch
+  - torchvision
+  - cudatoolkit=11.8  # Update this if your CUDA version differs
+  - ipykernel
+  - jupyter
+  - pip:
+    - accelerate
+    - diffusers
+    - datasets
+    - huggingface-hub
+    - transformers
+    - wandb
+    - opencv-python
+    - seaborn
+    - lpips
+    - tqdm
+    - super-image
+    - torchsummary
+    - gdown
