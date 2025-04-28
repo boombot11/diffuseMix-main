@@ -1,7 +1,4 @@
 import torch
-print(f"PyTorch version: {torch.__version__}")
-print(f"CUDA available: {torch.cuda.is_available()}")
-if torch.cuda.is_available():
-    print(f"CUDA device: {torch.cuda.get_device_name(0)}")
-else:
-    print("CUDA not available. Check your installation.")
+print(torch.__version__)
+print(torch.cuda.is_available())
+print(torch.cuda.get_device_name(0))
